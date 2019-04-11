@@ -27,13 +27,20 @@ public class RegistrationService {
 
         if (model.getVehicle().getId() == 0) {
             model.setVehicle(vehicleRepository.save(model.getVehicle()));
-        } else if (repository.findByVehicleAndInside(model.getVehicle(), true) != null) {
+        } else if (repository.findByVehicleAndInside(model.getVehicle(), true) != null && !model.getInside()) {
             throw new BOException("Este veículo já está estacionado.", new Throwable("registration.already.exists"));
         }
 
         if (model.getCheckout() != null) {
             model.setInside(false);
         }
+
+        return new RegistrationDto(this.repository.save(model));
+    }
+
+    public RegistrationDto enableExit(RegistrationDto dto) {
+        Registration model = new Registration(dto);
+        model.setInside(false);
 
         return new RegistrationDto(this.repository.save(model));
     }
@@ -71,12 +78,14 @@ public class RegistrationService {
     }
 
     public Collection<RegistrationDto> findByCheckinBetween(PeriodSearchDto period) {
-        Collection<Registration> Registrations = this.repository.findByCheckinBetween(period.getStart(), period.getEnd());
+        Collection<Registration> Registrations = this.repository.findByCheckinBetween(period.getStart(), new Date(period.getEnd().getTime() + (1000 * 60 * 60 * 24)));
         Collection<RegistrationDto> RegistrationsDto = new ArrayList<>();
-
-        Registrations.forEach((item) -> {
+        for (Registration item : Registrations) {
+            if (!period.getInside() && item.getInside()) {
+                continue;
+            }
             RegistrationsDto.add(new RegistrationDto(item));
-        });
+        }
 
         return RegistrationsDto;
     }

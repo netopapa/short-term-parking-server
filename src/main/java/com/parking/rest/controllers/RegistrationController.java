@@ -60,6 +60,20 @@ public class RegistrationController {
         return getResponseEntity(RegistrationDto, result);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, path = "/enableExit")
+    public ResponseEntity<?> enableExit(@Valid @RequestBody RegistrationDto RegistrationDto, BindingResult result) {
+
+        if (result.hasErrors()) {
+            List<String> errors = new ArrayList<>();
+            result.getAllErrors().forEach(error -> errors.add(error.getDefaultMessage()));
+            return ResponseEntity.badRequest().body(errors);
+        }
+
+        RegistrationDto response = this.service.enableExit(RegistrationDto);
+
+        return ResponseEntity.ok(response);
+    }
+
     private ResponseEntity<?> getResponseEntity(@RequestBody @Valid RegistrationDto RegistrationDto, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = new ArrayList<>();

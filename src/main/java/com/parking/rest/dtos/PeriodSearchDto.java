@@ -10,4 +10,5 @@ import java.util.Date;
 public class PeriodSearchDto {
     private Date start;
     private Date end;
+    private Boolean inside;
 }
