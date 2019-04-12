@@ -1,5 +1,6 @@
 package com.parking.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.parking.persistence.model.base.BaseModel;
 import com.parking.rest.dtos.VehicleDto;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "vehicle")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Vehicle extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 575436956203506212L;

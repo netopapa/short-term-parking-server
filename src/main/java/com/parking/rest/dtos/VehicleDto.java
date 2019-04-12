@@ -23,11 +23,11 @@ public class VehicleDto {
     public VehicleDto() {
     }
 
-    public VehicleDto(Vehicle vehicle) {
-        this.id = vehicle.getId();
-        this.model = vehicle.getModel();
-        this.color = vehicle.getColor();
-        this.plate = vehicle.getPlate();
+    public VehicleDto(Vehicle model) {
+        this.id = model.getId();
+        this.model = model.getModel();
+        this.color = model.getColor();
+        this.plate = model.getPlate();
     }
 
 }

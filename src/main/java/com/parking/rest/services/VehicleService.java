@@ -14,16 +14,16 @@ import java.util.Collection;
 public class VehicleService {
 
     @Autowired
-    private VehicleRepository vehicleRepository;
+    private VehicleRepository repository;
 
     public VehicleDto save(VehicleDto dto) {
         Vehicle model = new Vehicle(dto);
 
-        return new VehicleDto(this.vehicleRepository.save(model));
+        return new VehicleDto(this.repository.save(model));
     }
 
     public VehicleDto findOne(Long id) {
-        Vehicle model = this.vehicleRepository.getOne(id);
+        Vehicle model = this.repository.getOne(id);
 
         if (model == null) {
             throw new BOException("Veículo inexistente.", new Throwable("vehicle.notfound"));
@@ -33,18 +33,18 @@ public class VehicleService {
     }
 
     public Collection<VehicleDto> findAll() {
-        Collection<Vehicle> vehicles = this.vehicleRepository.findAll();
+        Collection<Vehicle> vehicles = this.repository.findAll();
         Collection<VehicleDto> vehiclesDto = new ArrayList<>();
 
-        vehicles.forEach((cam) -> {
-            vehiclesDto.add(new VehicleDto(cam));
+        vehicles.forEach((item) -> {
+            vehiclesDto.add(new VehicleDto(item));
         });
 
         return vehiclesDto;
     }
 
     public void delete(Long id) {
-        this.vehicleRepository.deleteById(id);
+        this.repository.deleteById(id);
     }
 
 }
