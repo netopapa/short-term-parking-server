@@ -9,7 +9,7 @@ import java.util.Date;
 
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
     Collection<Registration> findAllByInside(Boolean inside);
-
+    Collection<Registration> findAllByVehicleId(Long id);
     Registration findByVehicleAndInside(Vehicle vehicle, Boolean inside);
     Collection<Registration> findByCheckinBetween(Date start, Date end);
 }

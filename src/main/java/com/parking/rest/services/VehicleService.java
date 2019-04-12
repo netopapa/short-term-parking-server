@@ -2,6 +2,7 @@ package com.parking.rest.services;
 
 import com.parking.exception.BOException;
 import com.parking.persistence.model.Vehicle;
+import com.parking.persistence.repositories.RegistrationRepository;
 import com.parking.persistence.repositories.VehicleRepository;
 import com.parking.rest.dtos.VehicleDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class VehicleService {
 
     @Autowired
     private VehicleRepository repository;
+
+    @Autowired
+    private RegistrationRepository registrationRepository;
 
     public VehicleDto save(VehicleDto dto) {
         Vehicle model = new Vehicle(dto);
@@ -44,6 +48,10 @@ public class VehicleService {
     }
 
     public void delete(Long id) {
+        if (this.registrationRepository.findAllByVehicleId(id).size() > 0) {
+            throw new BOException("Existem registros associados a este veículo.", new Throwable("vehicle.already.associate"));
+        }
+
         this.repository.deleteById(id);
     }
 
