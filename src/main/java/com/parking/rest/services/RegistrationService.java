@@ -37,7 +37,7 @@ public class RegistrationService {
     }
 
     public Collection<RegistrationDto> findAll() {
-        Collection<Registration> Registrations = this.repository.findAll();
+        Collection<Registration> Registrations = this.repository.findAllByInside(false);
         Collection<RegistrationDto> RegistrationsDto = new ArrayList<>();
 
         Registrations.forEach((item) -> {
