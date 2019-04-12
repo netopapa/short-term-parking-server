@@ -4,12 +4,14 @@ import com.parking.exception.BOException;
 import com.parking.persistence.model.Registration;
 import com.parking.persistence.repositories.RegistrationRepository;
 import com.parking.persistence.repositories.VehicleRepository;
+import com.parking.rest.dtos.PeriodSearchDto;
 import com.parking.rest.dtos.RegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Service
 public class RegistrationService {
@@ -59,6 +61,17 @@ public class RegistrationService {
 
     public Collection<RegistrationDto> findAllInside() {
         Collection<Registration> Registrations = this.repository.findAllByInside(true);
+        Collection<RegistrationDto> RegistrationsDto = new ArrayList<>();
+
+        Registrations.forEach((item) -> {
+            RegistrationsDto.add(new RegistrationDto(item));
+        });
+
+        return RegistrationsDto;
+    }
+
+    public Collection<RegistrationDto> findByCheckinBetween(PeriodSearchDto period) {
+        Collection<Registration> Registrations = this.repository.findByCheckinBetween(period.getStart(), period.getEnd());
         Collection<RegistrationDto> RegistrationsDto = new ArrayList<>();
 
         Registrations.forEach((item) -> {

@@ -1,5 +1,6 @@
 package com.parking.rest.controllers;
 
+import com.parking.rest.dtos.PeriodSearchDto;
 import com.parking.rest.dtos.RegistrationDto;
 import com.parking.rest.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,13 @@ public class RegistrationController {
     @RequestMapping(method = RequestMethod.GET, path = "/inside")
     public ResponseEntity<Collection<RegistrationDto>> findAllInside() {
         Collection<RegistrationDto> response = this.service.findAllInside();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/findbetween")
+    public ResponseEntity<?> findBetween(@Valid @RequestBody PeriodSearchDto period) {
+        Collection<RegistrationDto> response = this.service.findByCheckinBetween(period);
 
         return ResponseEntity.ok(response);
     }
