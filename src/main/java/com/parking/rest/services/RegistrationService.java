@@ -3,6 +3,7 @@ package com.parking.rest.services;
 import com.parking.exception.BOException;
 import com.parking.persistence.model.Registration;
 import com.parking.persistence.repositories.RegistrationRepository;
+import com.parking.persistence.repositories.VehicleRepository;
 import com.parking.rest.dtos.RegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,17 @@ public class RegistrationService {
     @Autowired
     private RegistrationRepository repository;
 
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
     public RegistrationDto save(RegistrationDto dto) {
         Registration model = new Registration(dto);
+
+        if (model.getVehicle().getId() == 0) {
+            model.setVehicle(vehicleRepository.save(model.getVehicle()));
+        } else if (repository.findByVehicleAndInside(model.getVehicle(), true) != null) {
+            throw new BOException("Este veículo já está estacionado.", new Throwable("registration.already.exists"));
+        }
 
         if (model.getCheckout() != null) {
             model.setInside(false);

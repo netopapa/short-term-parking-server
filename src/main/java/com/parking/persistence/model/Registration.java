@@ -18,7 +18,7 @@ public class Registration extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
     private Vehicle vehicle;
 
     @Column(name = "checkin", nullable = false)
