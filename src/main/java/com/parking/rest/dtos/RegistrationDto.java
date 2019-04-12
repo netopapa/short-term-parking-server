@@ -33,6 +33,7 @@ public class RegistrationDto {
         this.id = model.getId();
         this.vehicle = model.getVehicle();
         this.checkin = model.getCheckin();
+        this.value = model.getValue();
 
         if (model.getCheckout() != null) {
             this.setCheckout(model.getCheckout());

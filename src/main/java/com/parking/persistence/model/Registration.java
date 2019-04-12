@@ -41,6 +41,7 @@ public class Registration extends BaseModel implements Serializable {
             super.setId(dto.getId());
         }
 
+        this.value = dto.getValue();
         this.vehicle = dto.getVehicle();
         this.checkin = dto.getCheckin();
 
