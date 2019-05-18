@@ -33,7 +33,7 @@ public class ReceitaService {
     }
 
     public Collection<ReceitaDto> findByCpfOrSus(String filter) {
-        Collection<Receita> receitas = this.repository.findAllByCpfOrSus(filter);
+        Collection<Receita> receitas = this.repository.findAllByCpfOrSus(filter, filter);
         Collection<ReceitaDto> receitasDto = new ArrayList<>();
 
         receitas.forEach((item) -> {
