@@ -26,21 +26,32 @@ public class ReceitaService {
         Receita model = this.repository.getOne(id);
 
         if (model == null) {
-            throw new BOException("Veículo inexistente.", new Throwable("receita.notfound"));
+            throw new BOException("Receita inexistente.", new Throwable("receita.notfound"));
         }
 
         return new ReceitaDto(model);
     }
 
-    public Collection<ReceitaDto> findAll() {
-        Collection<Receita> receitas = this.repository.findAll();
-        Collection<ReceitaDto> vehiclesDto = new ArrayList<>();
+    public Collection<ReceitaDto> findByCpfOrSus(String filter) {
+        Collection<Receita> receitas = this.repository.findAllByCpfOrSus(filter);
+        Collection<ReceitaDto> receitasDto = new ArrayList<>();
 
         receitas.forEach((item) -> {
-            vehiclesDto.add(new ReceitaDto(item));
+            receitasDto.add(new ReceitaDto(item));
         });
 
-        return vehiclesDto;
+        return receitasDto;
+    }
+
+    public Collection<ReceitaDto> findAll() {
+        Collection<Receita> receitas = this.repository.findAll();
+        Collection<ReceitaDto> receitasDto = new ArrayList<>();
+
+        receitas.forEach((item) -> {
+            receitasDto.add(new ReceitaDto(item));
+        });
+
+        return receitasDto;
     }
 
     public void delete(Long id) {

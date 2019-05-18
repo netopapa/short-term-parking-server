@@ -41,6 +41,9 @@ public class Receita extends BaseModel implements Serializable {
     @CreationTimestamp
     private Date dateCreate;
 
+    @Column(name = "entregue")
+    private Boolean entregue = false;
+
     public Receita() {
     }
 
@@ -54,6 +57,7 @@ public class Receita extends BaseModel implements Serializable {
         this.endereco = dto.getEndereco();
         this.cpf = dto.getCpf();
         this.dateCreate = dto.getDateCreate();
+        this.entregue = dto.getEntregue();
         this.prescricoes = dto.getPrescricoes().stream().map(pres -> new Prescricao(pres)).collect(Collectors.toList());
     }
 

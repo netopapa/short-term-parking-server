@@ -33,6 +33,13 @@ public class ReceitaController {
         return ResponseEntity.ok(response);
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/search/{filter}")
+    public ResponseEntity<Collection<ReceitaDto>> findAllByCpfOrSus(@PathVariable("filter") String filter) {
+        Collection<ReceitaDto> response = this.service.findByCpfOrSus(filter);
+
+        return ResponseEntity.ok(response);
+    }
+
     @RequestMapping(method = RequestMethod.POST, path = "/")
     public ResponseEntity<?> save(@Valid @RequestBody ReceitaDto receitaDto, BindingResult result) {
 

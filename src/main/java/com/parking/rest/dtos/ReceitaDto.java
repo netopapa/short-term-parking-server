@@ -34,6 +34,9 @@ public class ReceitaDto {
     @JsonProperty("dateCreate")
     private Date dateCreate;
 
+    @JsonProperty("entregue")
+    private Boolean entregue;
+
     public ReceitaDto() {
     }
 
@@ -44,6 +47,7 @@ public class ReceitaDto {
         this.cpf = model.getCpf();
         this.endereco = model.getEndereco();
         this.dateCreate = model.getDateCreate();
+        this.entregue = model.getEntregue();
         this.prescricoes = model.getPrescricoes().stream().map(pres -> new PrescricaoDto(pres)).collect(Collectors.toList());
     }
 
