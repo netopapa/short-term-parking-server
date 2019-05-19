@@ -39,7 +39,7 @@ public class FarmaciaService {
     }
 
     public Collection<FarmaciaDto> findByMedicamentosContaining(String nomeMedicamento) {
-        Collection<Medicamento> medicamentos = this.medicamentoRepository.findByNomeLike(nomeMedicamento);
+        Collection<Medicamento> medicamentos = this.medicamentoRepository.findByNomeIgnoreCaseContaining(nomeMedicamento);
 
         if (medicamentos.size() < 1) {
             throw new BOException("Medicamento não presente.", new Throwable("medicamento.notfound"));
