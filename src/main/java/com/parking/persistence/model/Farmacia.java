@@ -26,7 +26,7 @@ public class Farmacia extends BaseModel implements Serializable {
     @Column(name = "endereco", nullable = false)
     private String endereco;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Medicamento> medicamentos;
 
     public Farmacia() {
