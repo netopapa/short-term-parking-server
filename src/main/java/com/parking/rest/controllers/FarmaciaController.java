@@ -1,7 +1,8 @@
 package com.parking.rest.controllers;
 
 import com.parking.rest.dtos.FarmaciaDto;
-import com.parking.rest.services.ReceitaService;
+import com.parking.rest.dtos.MedicamentoDto;
+import com.parking.rest.services.FarmaciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -14,10 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest/receita")
-public class ReceitaController {
+public class FarmaciaController {
 
     @Autowired
-    private ReceitaService service;
+    private FarmaciaService service;
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity<FarmaciaDto> findOne(@PathVariable("id") Long id) {
@@ -33,9 +34,9 @@ public class ReceitaController {
         return ResponseEntity.ok(response);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/search/{filter}")
-    public ResponseEntity<Collection<FarmaciaDto>> findAllByCpfOrSus(@PathVariable("filter") String filter) {
-        Collection<FarmaciaDto> response = this.service.findByCpfOrSus(filter);
+    @RequestMapping(method = RequestMethod.POST, path = "/filter")
+    public ResponseEntity<Collection<FarmaciaDto>> findByMedicamentosContaining(@Valid @RequestBody MedicamentoDto medicamento, BindingResult result) {
+        Collection<FarmaciaDto> response = this.service.findByMedicamentosContaining(medicamento.getNome());
 
         return ResponseEntity.ok(response);
     }
