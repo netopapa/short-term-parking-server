@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class PrescricaoDto {
+public class MedicamentoDto {
 
     private Long id;
 
@@ -18,18 +18,10 @@ public class PrescricaoDto {
     @JsonProperty("nome")
     private String nome;
 
-    @NotNull(message = "Quantidade não pode estar vazio.")
-    @JsonProperty("quantidade")
-    private int quantidade;
-
-    @NotNull(message = "Observação não pode estar vazio.")
-    @JsonProperty("obs")
-    private String obs;
-
-    public PrescricaoDto() {
+    public MedicamentoDto() {
     }
 
-    public PrescricaoDto(Medicamento model) {
+    public MedicamentoDto(Medicamento model) {
         this.id = model.getId();
         this.nome = model.getNome();
     }

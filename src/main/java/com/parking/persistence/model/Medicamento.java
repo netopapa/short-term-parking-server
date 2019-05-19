@@ -1,7 +1,7 @@
 package com.parking.persistence.model;
 
 import com.parking.persistence.model.base.BaseModel;
-import com.parking.rest.dtos.PrescricaoDto;
+import com.parking.rest.dtos.MedicamentoDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +24,7 @@ public class Medicamento extends BaseModel implements Serializable {
     public Medicamento() {
     }
 
-    public Medicamento(PrescricaoDto dto) {
+    public Medicamento(MedicamentoDto dto) {
         if (dto.getId() != null) {
             super.setId(dto.getId());
         }
