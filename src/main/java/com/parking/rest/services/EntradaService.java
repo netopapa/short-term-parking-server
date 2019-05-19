@@ -37,19 +37,19 @@ public class EntradaService {
         return new EntradaDto(model);
     }
 
-    public MyResult findBetween(int selected) {
+    public MyResult findBetween(int mes, Long farm, Long med) {
         Calendar start = Calendar.getInstance();
         Calendar end = Calendar.getInstance();
 
-        start.set(Calendar.MONTH, selected);
+        start.set(Calendar.MONTH, mes);
         start.set(Calendar.DAY_OF_MONTH, start.getActualMinimum(Calendar.DATE));
-        end.set(Calendar.MONTH, selected);
+        end.set(Calendar.MONTH, mes);
         end.set(Calendar.DAY_OF_MONTH, start.getActualMaximum(Calendar.DATE));
 
         System.out.println(start.getTime());
         System.out.println(end.getTime());
 
-        List<Entrada> entradas = this.repository.findAllByDataEntradaBetween(start.getTime(), end.getTime());
+        List<Entrada> entradas = this.repository.findAllByDataEntradaBetweenAndFarmaciaIdAndMedicamentoId(start.getTime(), end.getTime(), farm, med);
 
         int soma = 0;
 

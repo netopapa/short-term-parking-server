@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface EntradaRepository extends JpaRepository<Entrada, Long> {
-    List<Entrada> findAllByDataEntradaBetween(Date start, Date end);
+    List<Entrada> findAllByDataEntradaBetweenAndFarmaciaIdAndMedicamentoId(Date start, Date end, Long id_farm, Long id_med);
 
     Collection<Entrada> findAllByMedicamento(Medicamento medicamento);
 

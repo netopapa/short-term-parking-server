@@ -35,9 +35,9 @@ public class EntradaController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "/filtermounth/{num}")
-    public ResponseEntity<MyResult> findOne(@PathVariable("num") int num) {
-        return ResponseEntity.ok(this.service.findBetween(num));
+    @RequestMapping(method = RequestMethod.GET, path = "/filtermounth/{mes}/{farm}/{med}")
+    public ResponseEntity<MyResult> findOne(@PathVariable("mes") int mes, @PathVariable("farm") Long farm, @PathVariable("med") Long med) {
+        return ResponseEntity.ok(this.service.findBetween(mes, farm, med));
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/")
