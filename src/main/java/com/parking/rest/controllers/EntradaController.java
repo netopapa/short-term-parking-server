@@ -1,6 +1,7 @@
 package com.parking.rest.controllers;
 
 import com.parking.rest.dtos.EntradaDto;
+import com.parking.rest.dtos.MyResult;
 import com.parking.rest.services.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,12 @@ public class EntradaController {
         Collection<EntradaDto> response = this.service.findAll();
 
         return ResponseEntity.ok(response);
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, path = "/filtermounth/{num}")
+    public ResponseEntity<MyResult> findOne(@PathVariable("num") int num) {
+        return ResponseEntity.ok(this.service.findBetween(num));
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/")

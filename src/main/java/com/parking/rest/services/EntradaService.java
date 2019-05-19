@@ -4,11 +4,15 @@ import com.parking.exception.BOException;
 import com.parking.persistence.model.Entrada;
 import com.parking.persistence.repositories.EntradaRepository;
 import com.parking.rest.dtos.EntradaDto;
+import com.parking.rest.dtos.MyResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,10 +37,30 @@ public class EntradaService {
         return new EntradaDto(model);
     }
 
-    public Collection<EntradaDto> findBetween(Date start, Date end) {
-        Collection<Entrada> Entradas = this.repository.findAllByDataEntradaBetween(start, end);
+    public MyResult findBetween(int selected) {
+        Calendar start = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
 
-        return Entradas.stream().map(entrada -> new EntradaDto(entrada)).collect(Collectors.toList());
+        start.set(Calendar.MONTH, selected);
+        start.set(Calendar.DAY_OF_MONTH, start.getActualMinimum(Calendar.DATE));
+        end.set(Calendar.MONTH, selected);
+        end.set(Calendar.DAY_OF_MONTH, start.getActualMaximum(Calendar.DATE));
+
+        System.out.println(start.getTime());
+        System.out.println(end.getTime());
+
+        List<Entrada> entradas = this.repository.findAllByDataEntradaBetween(start.getTime(), end.getTime());
+
+        int soma = 0;
+
+        for (int i = 0; i< entradas.size(); i++) {
+            soma += entradas.get(i).getQuantidade();
+        }
+
+        MyResult result = new MyResult();
+        result.setResult(soma/(entradas.size()));
+
+        return result;
     }
 
     public Collection<EntradaDto> findAll() {

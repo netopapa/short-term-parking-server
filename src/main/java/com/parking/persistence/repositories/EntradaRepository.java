@@ -7,11 +7,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 public interface EntradaRepository extends JpaRepository<Entrada, Long> {
-    Collection<Entrada> findAllByDataEntradaBetween(Date start, Date end);
+    List<Entrada> findAllByDataEntradaBetween(Date start, Date end);
 
     Collection<Entrada> findAllByMedicamento(Medicamento medicamento);
 
     Collection<Entrada> findAllByFarmacia(Farmacia farmacia);
+
+
 }
