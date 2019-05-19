@@ -48,7 +48,7 @@ public class FarmaciaService {
         Collection<Farmacia> farmacias = new ArrayList<>();
 
         medicamentos.forEach(med -> {
-            farmacias.addAll(this.repository.findByMedicamentosContaining(med));
+            farmacias.addAll(this.repository.findAllByMedicamentoNative(med.getNome()));
         });
 
         return farmacias.stream().map(farm -> new FarmaciaDto(farm)).collect(Collectors.toList());

@@ -2,7 +2,6 @@ package com.parking.rest.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.parking.persistence.model.Entrada;
-import com.parking.persistence.model.Farmacia;
 import lombok.Getter;
 import lombok.Setter;
 

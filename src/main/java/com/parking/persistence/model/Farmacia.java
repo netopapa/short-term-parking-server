@@ -27,7 +27,7 @@ public class Farmacia extends BaseModel implements Serializable {
     private String endereco;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    private List<Medicamento> medicamentos;
+    private List<Lote> lotes;
 
     public Farmacia() {
     }
@@ -39,7 +39,7 @@ public class Farmacia extends BaseModel implements Serializable {
 
         this.nome = dto.getNome();
         this.endereco = dto.getEndereco();
-        this.medicamentos = dto.getMedicamentos().stream().map(pres -> new Medicamento(pres)).collect(Collectors.toList());
+        this.lotes = dto.getLotes().stream().map(lote -> new Lote(lote)).collect(Collectors.toList());
     }
 
 }

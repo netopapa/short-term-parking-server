@@ -22,8 +22,8 @@ public class FarmaciaDto {
     @JsonProperty("endereco")
     private String endereco;
 
-    @JsonProperty("medicamentos")
-    private List<MedicamentoDto> medicamentos;
+    @JsonProperty("lotes")
+    private List<LoteDto> lotes;
 
     public FarmaciaDto() {
     }
@@ -32,7 +32,7 @@ public class FarmaciaDto {
         this.id = model.getId();
         this.nome = model.getNome();
         this.endereco = model.getEndereco();
-        this.medicamentos = model.getMedicamentos().stream().map(pres -> new MedicamentoDto(pres)).collect(Collectors.toList());
+        this.lotes = model.getLotes().stream().map(lote -> new LoteDto(lote)).collect(Collectors.toList());
     }
 
 }
