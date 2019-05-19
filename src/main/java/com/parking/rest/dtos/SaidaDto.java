@@ -18,6 +18,10 @@ public class SaidaDto {
     @JsonProperty("medicamento")
     private MedicamentoDto medicamento;
 
+    @NotNull(message = "Farmacia não pode estar vazio.")
+    @JsonProperty("farmacia")
+    private FarmaciaDto farmacia;
+
     @JsonProperty("data")
     private Date dataSaida;
 
@@ -33,5 +37,6 @@ public class SaidaDto {
         this.medicamento = new MedicamentoDto(model.getMedicamento());
         this.dataSaida = model.getDataSaida();
         this.quantidade = model.getQuantidade();
+        this.farmacia = new FarmaciaDto(model.getFarmacia());
     }
 }

@@ -2,6 +2,7 @@ package com.parking.rest.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.parking.persistence.model.Entrada;
+import com.parking.persistence.model.Farmacia;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,10 @@ public class EntradaDto {
     @JsonProperty("medicamento")
     private MedicamentoDto medicamento;
 
+    @NotNull(message = "Farmacia não pode estar vazio.")
+    @JsonProperty("farmacia")
+    private FarmaciaDto farmacia;
+
     @JsonProperty("data")
     private Date dataEntrada;
 
@@ -33,5 +38,6 @@ public class EntradaDto {
         this.medicamento = new MedicamentoDto(model.getMedicamento());
         this.dataEntrada = model.getDataEntrada();
         this.quantidade = model.getQuantidade();
+        this.farmacia = new FarmaciaDto(model.getFarmacia());
     }
 }

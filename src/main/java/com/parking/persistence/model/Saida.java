@@ -21,6 +21,9 @@ public class Saida extends BaseModel implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Medicamento medicamento;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private Farmacia farmacia;
+
     @Column(name = "data_saida")
     @CreationTimestamp
     private Date dataSaida;
@@ -39,5 +42,6 @@ public class Saida extends BaseModel implements Serializable {
         this.medicamento = new Medicamento(dto.getMedicamento());
         this.quantidade = dto.getQuantidade();
         this.dataSaida = dto.getDataSaida();
+        this.farmacia = new Farmacia(dto.getFarmacia());
     }
 }
