@@ -27,7 +27,7 @@ public class EntradaService {
         Entrada model = this.repository.getOne(id);
 
         if (model == null) {
-            throw new BOException("Entrada inexistente.", new Throwable("receita.notfound"));
+            throw new BOException("Entrada inexistente.", new Throwable("entrada.notfound"));
         }
 
         return new EntradaDto(model);
