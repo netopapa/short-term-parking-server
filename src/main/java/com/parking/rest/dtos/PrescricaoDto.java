@@ -1,7 +1,7 @@
 package com.parking.rest.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.parking.persistence.model.Prescricao;
+import com.parking.persistence.model.Medicamento;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,10 +29,8 @@ public class PrescricaoDto {
     public PrescricaoDto() {
     }
 
-    public PrescricaoDto(Prescricao model) {
+    public PrescricaoDto(Medicamento model) {
         this.id = model.getId();
         this.nome = model.getNome();
-        this.quantidade = model.getQuantidade();
-        this.obs = model.getObs();
     }
 }

@@ -1,9 +1,9 @@
 package com.parking.rest.services;
 
 import com.parking.exception.BOException;
-import com.parking.persistence.model.Receita;
+import com.parking.persistence.model.Farmacia;
 import com.parking.persistence.repositories.ReceitaRepository;
-import com.parking.rest.dtos.ReceitaDto;
+import com.parking.rest.dtos.FarmaciaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,39 +16,39 @@ public class ReceitaService {
     @Autowired
     private ReceitaRepository repository;
 
-    public ReceitaDto save(ReceitaDto dto) {
-        Receita model = new Receita(dto);
+    public FarmaciaDto save(FarmaciaDto dto) {
+        Farmacia model = new Farmacia(dto);
 
-        return new ReceitaDto(this.repository.save(model));
+        return new FarmaciaDto(this.repository.save(model));
     }
 
-    public ReceitaDto findOne(Long id) {
-        Receita model = this.repository.getOne(id);
+    public FarmaciaDto findOne(Long id) {
+        Farmacia model = this.repository.getOne(id);
 
         if (model == null) {
-            throw new BOException("Receita inexistente.", new Throwable("receita.notfound"));
+            throw new BOException("Farmacia inexistente.", new Throwable("receita.notfound"));
         }
 
-        return new ReceitaDto(model);
+        return new FarmaciaDto(model);
     }
 
-    public Collection<ReceitaDto> findByCpfOrSus(String filter) {
-        Collection<Receita> receitas = this.repository.findAllByCpfOrSus(filter, filter);
-        Collection<ReceitaDto> receitasDto = new ArrayList<>();
+    public Collection<FarmaciaDto> findByCpfOrSus(String filter) {
+        Collection<Farmacia> farmacias = this.repository.findAllByCpfOrSus(filter, filter);
+        Collection<FarmaciaDto> receitasDto = new ArrayList<>();
 
-        receitas.forEach((item) -> {
-            receitasDto.add(new ReceitaDto(item));
+        farmacias.forEach((item) -> {
+            receitasDto.add(new FarmaciaDto(item));
         });
 
         return receitasDto;
     }
 
-    public Collection<ReceitaDto> findAll() {
-        Collection<Receita> receitas = this.repository.findAll();
-        Collection<ReceitaDto> receitasDto = new ArrayList<>();
+    public Collection<FarmaciaDto> findAll() {
+        Collection<Farmacia> farmacias = this.repository.findAll();
+        Collection<FarmaciaDto> receitasDto = new ArrayList<>();
 
-        receitas.forEach((item) -> {
-            receitasDto.add(new ReceitaDto(item));
+        farmacias.forEach((item) -> {
+            receitasDto.add(new FarmaciaDto(item));
         });
 
         return receitasDto;

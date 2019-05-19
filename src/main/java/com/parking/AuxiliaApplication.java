@@ -13,10 +13,10 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-public class MeuRemedioApplication {
+public class AuxiliaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MeuRemedioApplication.class, args);
+        SpringApplication.run(AuxiliaApplication.class, args);
     }
 
     @Bean

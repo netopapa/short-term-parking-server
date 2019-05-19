@@ -1,6 +1,6 @@
 package com.parking.rest.controllers;
 
-import com.parking.rest.dtos.ReceitaDto;
+import com.parking.rest.dtos.FarmaciaDto;
 import com.parking.rest.services.ReceitaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,46 +20,46 @@ public class ReceitaController {
     private ReceitaService service;
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ResponseEntity<ReceitaDto> findOne(@PathVariable("id") Long id) {
-        ReceitaDto response = this.service.findOne(id);
+    public ResponseEntity<FarmaciaDto> findOne(@PathVariable("id") Long id) {
+        FarmaciaDto response = this.service.findOne(id);
 
         return ResponseEntity.ok(response);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    public ResponseEntity<Collection<ReceitaDto>> findAll() {
-        Collection<ReceitaDto> response = this.service.findAll();
+    public ResponseEntity<Collection<FarmaciaDto>> findAll() {
+        Collection<FarmaciaDto> response = this.service.findAll();
 
         return ResponseEntity.ok(response);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/search/{filter}")
-    public ResponseEntity<Collection<ReceitaDto>> findAllByCpfOrSus(@PathVariable("filter") String filter) {
-        Collection<ReceitaDto> response = this.service.findByCpfOrSus(filter);
+    public ResponseEntity<Collection<FarmaciaDto>> findAllByCpfOrSus(@PathVariable("filter") String filter) {
+        Collection<FarmaciaDto> response = this.service.findByCpfOrSus(filter);
 
         return ResponseEntity.ok(response);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/")
-    public ResponseEntity<?> save(@Valid @RequestBody ReceitaDto receitaDto, BindingResult result) {
+    public ResponseEntity<?> save(@Valid @RequestBody FarmaciaDto farmaciaDto, BindingResult result) {
 
-        return getResponseEntity(receitaDto, result);
+        return getResponseEntity(farmaciaDto, result);
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/")
-    public ResponseEntity<?> update(@Valid @RequestBody ReceitaDto receitaDto, BindingResult result) {
+    public ResponseEntity<?> update(@Valid @RequestBody FarmaciaDto farmaciaDto, BindingResult result) {
 
-        return getResponseEntity(receitaDto, result);
+        return getResponseEntity(farmaciaDto, result);
     }
 
-    private ResponseEntity<?> getResponseEntity(@RequestBody @Valid ReceitaDto receitaDto, BindingResult result) {
+    private ResponseEntity<?> getResponseEntity(@RequestBody @Valid FarmaciaDto farmaciaDto, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = new ArrayList<>();
             result.getAllErrors().forEach(error -> errors.add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(errors);
         }
 
-        ReceitaDto response = this.service.save(receitaDto);
+        FarmaciaDto response = this.service.save(farmaciaDto);
 
         return ResponseEntity.ok(response);
     }

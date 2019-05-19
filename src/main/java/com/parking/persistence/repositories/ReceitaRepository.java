@@ -1,10 +1,10 @@
 package com.parking.persistence.repositories;
 
-import com.parking.persistence.model.Receita;
+import com.parking.persistence.model.Farmacia;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface ReceitaRepository extends JpaRepository<Receita, Long> {
-    Collection<Receita> findAllByCpfOrSus(String cpf, String sus);
+public interface ReceitaRepository extends JpaRepository<Farmacia, Long> {
+    Collection<Farmacia> findAllByCpfOrSus(String cpf, String sus);
 }

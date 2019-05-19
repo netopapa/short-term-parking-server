@@ -13,30 +13,22 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "prescricao")
-public class Prescricao extends BaseModel implements Serializable {
+@Table(name = "medicamento")
+public class Medicamento extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "quantidade", nullable = false)
-    private int quantidade;
-
-    @Column(name = "obs")
-    private String obs;
-
-    public Prescricao() {
+    public Medicamento() {
     }
 
-    public Prescricao(PrescricaoDto dto) {
+    public Medicamento(PrescricaoDto dto) {
         if (dto.getId() != null) {
             super.setId(dto.getId());
         }
 
         this.nome = dto.getNome();
-        this.quantidade = dto.getQuantidade();
-        this.obs = dto.getObs();
     }
 }
